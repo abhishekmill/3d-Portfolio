@@ -22,6 +22,8 @@ const Images = () => {
           scale={[width / 8, height / 2.5]}
           position={[width / 5, 0 * 1.2, 2]}
         />
+        
+        
       </group>
     );
   };
@@ -36,8 +38,9 @@ const Images = () => {
         urls={["./images/img2.jpg", "./images/img2.jpg", "./images/img2.jpg"]}
       />
       <Slides
-        position={[2* width/1.3 , 0, 0]}
-        urls={["./images/img2.jpg", "./images/img2.jpg", "./images/img2.jpg"]}
+        position={[(2 * width) / 1.3, 0, 0]}
+        urls={["./images/img3.jpg", "./images/img3.jpg", "./images/img3.jpg"]}
+        
       />
     </group>
   );
