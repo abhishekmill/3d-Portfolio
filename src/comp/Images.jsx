@@ -1,12 +1,16 @@
-import { Image } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-const Images = () => {
-  const viewport = useThree((t) => t.viewport);
+import { Image, useScroll } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useEffect, useRef } from "react";
+const Images = ({ viewport }) => {
   const { height, width } = viewport;
+
+  const scroll = useScroll();
+  const img = useRef();
+
 
   const Slides = ({ urls, ...props }) => {
     return (
-      <group {...props}>
+      <group ref={img} {...props}>
         <Image
           url={urls[0]}
           scale={[width / 8, height / 2.5]}
@@ -22,14 +26,12 @@ const Images = () => {
           scale={[width / 8, height / 2.5]}
           position={[width / 5, 0 * 1.2, 2]}
         />
-        
-        
       </group>
     );
   };
 
   return (
-    <group>
+    <group ref={img}>
       <Slides
         urls={["./images/img1.jpg", "./images/img1.jpg", "./images/img1.jpg"]}
       />
@@ -40,7 +42,6 @@ const Images = () => {
       <Slides
         position={[(2 * width) / 1.3, 0, 0]}
         urls={["./images/img3.jpg", "./images/img3.jpg", "./images/img3.jpg"]}
-        
       />
     </group>
   );

@@ -12,6 +12,12 @@
   "dependencies": {
     "@react-three/drei": "^9.114.3",
     "@react-three/fiber": "^8.17.10",
+    "@react-three/rapier": "^1.5.0",
+    "@react-three/rapier-addons": "^4.0.1",
+    "gsap": "^3.12.5",
+    "lamina": "^1.1.23",
+    "leva": "^0.9.35",
+    "rapier": "^1.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "three": "^0.169.0"
