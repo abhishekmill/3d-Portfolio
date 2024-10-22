@@ -38,7 +38,7 @@ const Bathroom = (props) => {
       <primitive
         object={gltf.scene}
         props={props}
-        rotation={[0, Math.PI / 1.3, 0]}
+        rotation={[0, Math.PI / 1.1, 0]}
         position={[0, -6.1, 0]}
         scale={[1.2, 1, 1]}
       />

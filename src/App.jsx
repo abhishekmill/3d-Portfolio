@@ -6,12 +6,12 @@ import {
   Preload,
 } from "@react-three/drei";
 import Scene from "./comp/Scene";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { AmbientLight, Camera } from "three";
 import { Bathroom, Bedroom, Office } from "./comp/Models";
 import Cameracontrol from "./comp/Cameracontrol";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { button, useControls } from "leva";
+import Overlay from "./comp/Overlay";
 
 export default function App() {
   const cameraRef = useRef();
@@ -27,10 +27,20 @@ export default function App() {
     }),
   });
 
+  const [animation, setAnimation] = useState("anim0");
+
+  useControls("animation", {
+    animation0: button(() => setAnimation("anim0")),
+    animation1: button(() => setAnimation("anim1")),
+    animation2: button(() => setAnimation("anim2")),
+    animation3: button(() => setAnimation("anim3")),
+  });
+
   return (
     <div className="w-full h-screen">
+      <Overlay animation={animation} />
       <Canvas>
-        <Cameracontrol />
+        <Cameracontrol animation={animation} />
         {/* <CameraControls ref={cameraRef} /> */}
 
         <group position={[0, 0, 1]}>

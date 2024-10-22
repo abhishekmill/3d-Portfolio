@@ -1,31 +1,39 @@
-import { useRef, useEffect } from "react";
-import { useThree } from "@react-three/fiber";
+import { useRef, useEffect, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { button, useControls } from "leva";
 import * as THREE from "three";
 
-const Cameracontrol = () => {
-  const { camera, gl } = useThree(); // Access Three.js camera and renderer
-  const controlsRef = useRef(); // Reference to OrbitControls
-  const lerpDuration = 1.5; // Duration for smooth transitions
+const Cameracontrol = ({ animation }) => {
+  const { camera, gl } = useThree();
+  const controlsRef = useRef();
+  const lerpDuration = 1.9; // Duration for smooth transitions
+  const [anim, setAnim] = useState("false");
+  const [angleStep, setAngleStep] = useState(0);
+  const [angle, setAngle] = useState(0);
 
+  const speedFactor = 0.01;
   // Animation parameters for different camera positions and targets
   const animationParam = {
     anim0: {
-      target: [-0.2861038563479678, -0.41493212624465536, -0.01076793117141741],
-      position: [0.4698881127225513, -0.6567904310100844, 3.033901073149795],
+      target: [
+        0.09845601044299077, -0.05784483214745292, -0.016658098145246335,
+      ],
+      position: [1.4313845108525005, -0.5712337056803873, 3.23537598807995],
     },
     anim1: {
-      target: [0.34949783348077756, -0.3137539882326418, 0.07104923480165103],
-      position: [-0.6622006346810204, -0.5309268790442155, 3.179943478956814],
+      target: [
+        0.19966117031727332, -0.15418797624161293, 0.0048186947585095175,
+      ],
+      position: [0.8734616995338282, -0.36482528590900754, 3.4858554643496444],
     },
     anim2: {
-      target: [0.08068517674275053, -2.6452299730054682, 0.8355455931180833],
-      position: [0.5600834975779017, -2.399323588662026, 2.283233994068536],
+      target: [0.09441432548287099, -2.5869219470870406, -0.14608406822428832],
+      position: [0.3600904907234163, -2.5869219470870406, 2.363088417611424],
     },
     anim3: {
-      target: [-0.20979986240906262, -5.077198048519114, 1.3845695011284183],
-      position: [-0.6024951101520235, -4.785438919855276, 3.1507987796932864],
+      target: [0.3276577497900221, -4.6528068229667285, -0.8309161533660673],
+      position: [0.6082816839145214, -4.746467506417783, 2.708641743407749],
     },
   };
 
@@ -38,20 +46,22 @@ const Cameracontrol = () => {
     return start + (end - start) * progress;
   };
 
-  const animateCamera = (anim) => {
+  const animateCamera = async (anim) => {
+    setAnim(true); // Stop the autorotate while the camera is animating
     const initialPosition = new THREE.Vector3().copy(camera.position); // Current camera position
     const initialTarget = new THREE.Vector3().copy(controlsRef.current.target); // Current target position
     const finalPosition = new THREE.Vector3(...anim.position); // Target camera position
     const finalTarget = new THREE.Vector3(...anim.target); // Target look-at position
 
     let elapsedTime = 0;
+    const lerpDuration = 2; // Duration for the animation (adjust as needed)
 
     const animate = () => {
       elapsedTime += 0.02;
 
       // Calculate progress based on easing function
-      const progress = Math.min(elapsedTime / lerpDuration, 1); // Ensures the value is between 0 and 1
-      const easedProgress = easeInOutQuad(progress); // Apply easing
+      const progress = Math.min(elapsedTime / lerpDuration, 1); // Ensure progress is between 0 and 1
+      const easedProgress = easeInOutQuad(progress); // Apply easing function
 
       // Lerp for smooth transitions between positions and targets with easing
       camera.position.set(
@@ -69,20 +79,53 @@ const Cameracontrol = () => {
       controlsRef.current.update();
 
       if (progress < 1) {
-        // Keep animating until progress reaches 1
+        // Continue animating
         requestAnimationFrame(animate);
+      } else {
+        // Animation finished, resume autorotation
+        // setAngleStep(4);
+        setAnim(false);
       }
     };
 
-    animate(); // Start the animation
+    animate();
   };
 
-  // Leva controls to trigger camera animations
-  useControls("animation", {
-    animation0: button(() => animateCamera(animationParam.anim0)),
-    animation1: button(() => animateCamera(animationParam.anim1)),
-    animation2: button(() => animateCamera(animationParam.anim2)),
-    animation3: button(() => animateCamera(animationParam.anim3)),
+  useEffect(() => {
+    console.log(animation == "anim1");
+    if (animation == "anim0") {
+      animateCamera(animationParam.anim0);
+    }
+    if (animation == "anim1") {
+      animateCamera(animationParam.anim1);
+    }
+    if (animation == "anim2") {
+      animateCamera(animationParam.anim2);
+    }
+    if (animation == "anim3") {
+      animateCamera(animationParam.anim3);
+    }
+  }, [animation]);
+
+  useFrame(() => {
+    if (!anim) {
+      // Increment the angle step for rotation
+      setAngleStep((prevStep) => prevStep + speedFactor);
+
+      // Calculate the angle using sin and the incremented step
+      setAngle((Math.sin(angleStep) * Math.PI) / 13);
+
+      if (controlsRef.current) {
+        controlsRef.current.setAzimuthalAngle(angle); // Rotate around Y-axis
+        controlsRef.current.update(); // Update the controls to apply changes
+      }
+    }
+  });
+
+  useControls("helper angle", {
+    getAngle: button(() => {
+      console.log("Angle:", controlsRef.current.getAzimuthalAngle());
+    }),
   });
 
   useEffect(() => {
