@@ -3,16 +3,18 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { button, useControls } from "leva";
 import * as THREE from "three";
+import { easing } from "maath";
 
 const Cameracontrol = ({ animation }) => {
   const { camera, gl } = useThree();
   const controlsRef = useRef();
   const lerpDuration = 1.9; // Duration for smooth transitions
-  const [anim, setAnim] = useState("false");
+  const [anim, setAnim] = useState(false);
   const [angleStep, setAngleStep] = useState(0);
   const [angle, setAngle] = useState(0);
+  const [isMobile, setIsMobile] = useState("false");
 
-  const speedFactor = 0.01;
+  const speedFactor = 0.01; // Control speed of rotation
   // Animation parameters for different camera positions and targets
   const animationParam = {
     anim0: {
@@ -54,7 +56,6 @@ const Cameracontrol = ({ animation }) => {
     const finalTarget = new THREE.Vector3(...anim.target); // Target look-at position
 
     let elapsedTime = 0;
-    const lerpDuration = 2; // Duration for the animation (adjust as needed)
 
     const animate = () => {
       elapsedTime += 0.02;
@@ -82,8 +83,7 @@ const Cameracontrol = ({ animation }) => {
         // Continue animating
         requestAnimationFrame(animate);
       } else {
-        // Animation finished, resume autorotation
-        // setAngleStep(4);
+        // Animation finished
         setAnim(false);
       }
     };
@@ -92,32 +92,38 @@ const Cameracontrol = ({ animation }) => {
   };
 
   useEffect(() => {
-    console.log(animation == "anim1");
-    if (animation == "anim0") {
-      animateCamera(animationParam.anim0);
-    }
-    if (animation == "anim1") {
-      animateCamera(animationParam.anim1);
-    }
-    if (animation == "anim2") {
-      animateCamera(animationParam.anim2);
-    }
-    if (animation == "anim3") {
-      animateCamera(animationParam.anim3);
+    if (animation) {
+      animateCamera(animationParam[animation]);
     }
   }, [animation]);
 
-  useFrame(() => {
-    if (!anim) {
-      // Increment the angle step for rotation
-      setAngleStep((prevStep) => prevStep + speedFactor);
+  useFrame((state, delta) => {
+    const targetLookAt = new THREE.Vector3(0, -1, 0);
+    if (false) {
+      // Smooth zoom and rotation for desktop
+      easing.damp3(
+        state.camera.position,
+        [
+          state.pointer.x * 1,
+          -0.6 + state.pointer.y / 2,
+          5 + Math.atan(state.pointer.x * 2),
+        ],
+        0.7,
+        delta
+      );
+      // camera.lookAt(targetLookAt); // Look at the center
+    } else {
+      if (!anim) {
+        // Increment the angle step for rotation
+        setAngleStep((prevStep) => prevStep + speedFactor);
 
-      // Calculate the angle using sin and the incremented step
-      setAngle((Math.sin(angleStep) * Math.PI) / 13);
+        // Calculate the angle using sin and the incremented step
+        setAngle((Math.sin(angleStep) * Math.PI) / 13);
 
-      if (controlsRef.current) {
-        controlsRef.current.setAzimuthalAngle(angle); // Rotate around Y-axis
-        controlsRef.current.update(); // Update the controls to apply changes
+        if (controlsRef.current) {
+          controlsRef.current.setAzimuthalAngle(angle); // Rotate around Y-axis
+          controlsRef.current.update(); // Update the controls to apply changes
+        }
       }
     }
   });
@@ -129,14 +135,23 @@ const Cameracontrol = ({ animation }) => {
   });
 
   useEffect(() => {
-    animateCamera(animationParam.anim0);
+    animateCamera(animationParam.anim0); // Initialize camera position
     controlsRef.current.update(); // Sync controls with camera
   }, [camera]);
 
   return (
     <>
       {/* OrbitControls for camera interaction */}
-      <OrbitControls ref={controlsRef} args={[camera, gl.domElement]} />
+      <OrbitControls
+        dampingFactor={0.01}
+        maxDistance={3}
+        minDistance={2.4}
+        enablePan={false}
+        minPolarAngle={Math.PI / 2.3}
+        maxPolarAngle={Math.PI / 1.7}
+        ref={controlsRef}
+        args={[camera, gl.domElement]}
+      />
     </>
   );
 };

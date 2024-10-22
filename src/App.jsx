@@ -1,17 +1,30 @@
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useLoader, useThree } from "@react-three/fiber";
+import { degToRad } from "three/src/math/MathUtils.js";
 import {
+  Bvh,
   CameraControls,
   Environment,
   OrbitControls,
   Preload,
+  Sky,
 } from "@react-three/drei";
-import Scene from "./comp/Scene";
-import { AmbientLight, Camera } from "three";
-import { Bathroom, Bedroom, Office } from "./comp/Models";
+import {
+  EffectComposer,
+  N8AO,
+  Outline,
+  Select,
+  Selection,
+  TiltShift2,
+  ToneMapping,
+} from "@react-three/postprocessing";
+
 import Cameracontrol from "./comp/Cameracontrol";
 import { useRef, useState } from "react";
 import { button, useControls } from "leva";
 import Overlay from "./comp/Overlay";
+import { OfficeModel } from "./comp/Office";
+import { BedRoomModel } from "./comp/Bedroom";
+import { BathroomModel } from "./comp/Bathroom";
 
 export default function App() {
   const cameraRef = useRef();
@@ -43,16 +56,49 @@ export default function App() {
         <Cameracontrol animation={animation} />
         {/* <CameraControls ref={cameraRef} /> */}
 
-        <group position={[0, 0, 1]}>
-          <Office />
-          <Bathroom />
-          <Bedroom />
-        </group>
+        <Bvh firstHitOnly>
+          <Selection>
+            <Effects />
+            <OfficeModel
+              position={[0, -0.35, 1]}
+              rotation={[0, degToRad(-180 / 2.4), 0]}
+              scale={0.7}
+            />
+          </Selection>
+          <BedRoomModel position={[0, -2.5, 1]} scale={0.6} />
+          <BathroomModel
+            rotation={[0, Math.PI / 1.1, 0]}
+            position={[0, -6.1, 0.8]}
+            scale={[1.2, 1, 1]}
+          />
+        </Bvh>
+
         <color attach="background" args={["#151520"]} />
         <Environment preset="city" />
-        {/* <Scene /> */}
         <Preload />
       </Canvas>
     </div>
+  );
+}
+
+function Effects() {
+  const { size } = useThree();
+
+  return (
+    <EffectComposer
+      stencilBuffer
+      disableNormalPass
+      autoClear={false}
+      multisampling={4}
+    >
+      <Outline
+        visibleEdgeColor="white"
+        hiddenEdgeColor="white"
+        blur
+        width={size.width * 1.25}
+        edgeStrength={10}
+      />
+      <ToneMapping />
+    </EffectComposer>
   );
 }

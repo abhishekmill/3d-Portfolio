@@ -1,18 +1,20 @@
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { degToRad } from "three/src/math/MathUtils.js";
+import { OfficeModel } from "./Office";
 
 const Office = ({ props }) => {
   const gltf = useLoader(GLTFLoader, "./office.glb");
   return (
     <>
-      <primitive
+      {/* <primitive
         object={gltf.scene}
         props={props}
         scale={0.7}
         position={[0,-.35,0]}
         rotation={[0, degToRad(-180 / 2.4), 0]}
-      />
+      /> */}
+      
     </>
   );
 };
