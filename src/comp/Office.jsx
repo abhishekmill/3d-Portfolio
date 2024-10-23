@@ -1,16 +1,13 @@
 import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
-export function OfficeModel(props) {
+export function OfficeModel({
+  hoverElement,
+  updateHover,
+  reUpdateHover,
+  ...props
+}) {
   const { nodes, materials } = useGLTF("./office.glb");
-  const [hoverElement, setHoverElement] = useState("null");
-  const updateHover = (n) => {
-    // console.log(n.object.name);
-    setHoverElement(n.object.name);
-  };
-  const reUpdateHover = () => {
-    setHoverElement("null");
-  };
 
   return (
     <group {...props} dispose={null}>

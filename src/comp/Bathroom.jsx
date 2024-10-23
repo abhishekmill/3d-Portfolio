@@ -1,7 +1,13 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { Select } from "@react-three/postprocessing";
 
-export function BathroomModel(props) {
+export function BathroomModel({
+  hoverElement,
+  updateHover,
+  reUpdateHover,
+  ...props
+}) {
   const { nodes, materials } = useGLTF("./bathroom.glb");
   return (
     <group {...props} dispose={null}>
@@ -24,12 +30,17 @@ export function BathroomModel(props) {
               geometry={nodes.Bathroom_Bottles_0.geometry}
               material={materials.Bottles}
             />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Bathroom_Cabinet_0.geometry}
-              material={materials.Cabinet}
-            />
+            <Select enabled={hoverElement === "basein"}>
+              <mesh
+                name="basein"
+                castShadow
+                receiveShadow
+                geometry={nodes.Bathroom_Cabinet_0.geometry}
+                material={materials.Cabinet}
+                onPointerOver={updateHover}
+                onPointerOut={reUpdateHover}
+              />
+            </Select>
             <mesh
               castShadow
               receiveShadow
@@ -42,17 +53,25 @@ export function BathroomModel(props) {
               geometry={nodes.Bathroom_Floor_0.geometry}
               material={materials.Floor}
             />
+            <Select enabled={hoverElement === "light"}>
+              <mesh
+                name="light"
+                castShadow
+                receiveShadow
+                geometry={nodes.Bathroom_Light_0.geometry}
+                material={materials.Light}
+                onPointerOver={updateHover}
+                onPointerOut={reUpdateHover}
+              />
+            </Select>
             <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Bathroom_Light_0.geometry}
-              material={materials.Light}
-            />
-            <mesh
+              name="mirror"
               castShadow
               receiveShadow
               geometry={nodes.Bathroom_Mirror_0.geometry}
               material={materials.Mirror}
+              onPointerOver={updateHover}
+              onPointerOut={reUpdateHover}
             />
             <mesh
               castShadow
@@ -60,12 +79,17 @@ export function BathroomModel(props) {
               geometry={nodes.Bathroom_MirrorLight_0.geometry}
               material={materials.MirrorLight}
             />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Bathroom_MirrorTrim_0.geometry}
-              material={materials.MirrorTrim}
-            />
+            <Select enabled={hoverElement === "mirror"}>
+              <mesh
+                name="mirror"
+                castShadow
+                receiveShadow
+                geometry={nodes.Bathroom_MirrorTrim_0.geometry}
+                material={materials.MirrorTrim}
+                onPointerOver={updateHover}
+                onPointerOut={reUpdateHover}
+              />
+            </Select>
             <mesh
               castShadow
               receiveShadow
@@ -73,6 +97,7 @@ export function BathroomModel(props) {
               material={materials.Picture}
             />
             <mesh
+              name="picture"
               castShadow
               receiveShadow
               geometry={nodes.Bathroom_PictureFrame_0.geometry}
@@ -90,12 +115,19 @@ export function BathroomModel(props) {
               geometry={nodes.Bathroom_SkirtingBoard_0.geometry}
               material={materials.SkirtingBoard}
             />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Bathroom_Toilet_0.geometry}
-              material={materials.Toilet}
-            />
+
+            <Select enabled={hoverElement === "toilet"}>
+              <mesh
+                name="toilet"
+                castShadow
+                receiveShadow
+                geometry={nodes.Bathroom_Toilet_0.geometry}
+                material={materials.Toilet}
+                onPointerOver={updateHover}
+                onPointerOut={reUpdateHover}
+              />
+            </Select>
+
             <mesh
               castShadow
               receiveShadow
@@ -141,14 +173,18 @@ export function BathroomModel(props) {
               rotation={[0, 0, -3.054]}
               scale={[0.052, 0.047, 0.653]}
             />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Tree_Tree_0.geometry}
-              material={materials.Tree}
-              position={[-0.782, 0.769, -0.031]}
-              scale={[0.15, 0.177, 3.406]}
-            />
+
+            <Select enabled={hoverElement === "gamla"}>
+              <mesh
+                name="gamla"
+                castShadow
+                receiveShadow
+                geometry={nodes.Tree_Tree_0.geometry}
+                material={materials.Tree}
+                position={[-0.782, 0.769, -0.031]}
+                scale={[0.15, 0.177, 3.406]}
+              />
+            </Select>
           </group>
         </group>
       </group>

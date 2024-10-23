@@ -2,7 +2,11 @@ import React from "react";
 
 const Overlay = ({ animation }) => {
   return (
-    <div className=" pointer-events-none absolute w-full h-screen overflow-hidden">
+    <div
+      className={` ${
+        animation == "anim0" ? "pointer-events-auto" : "pointer-events-none"
+      }  absolute w-full h-screen overflow-hidden`}
+    >
       <div
         className={` ${
           animation == "anim0" ? "bg-opacity-40 " : " bg-opacity-0 "

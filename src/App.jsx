@@ -48,6 +48,16 @@ export default function App() {
     animation2: button(() => setAnimation("anim2")),
     animation3: button(() => setAnimation("anim3")),
   });
+  const [hoverElement, setHoverElement] = useState(null);
+
+  const updateHover = (n) => {
+    n.stopPropagation();
+
+    setHoverElement(n.object.name);
+  };
+  const reUpdateHover = () => {
+    setHoverElement("null");
+  };
 
   return (
     <div className="w-full h-screen">
@@ -60,17 +70,29 @@ export default function App() {
           <Selection>
             <Effects />
             <OfficeModel
+              hoverElement={hoverElement}
+              updateHover={updateHover}
+              reUpdateHover={reUpdateHover}
               position={[0, -0.35, 1]}
               rotation={[0, degToRad(-180 / 2.4), 0]}
               scale={0.7}
             />
+            <BedRoomModel
+              position={[0, -2.5, 1]}
+              hoverElement={hoverElement}
+              updateHover={updateHover}
+              reUpdateHover={reUpdateHover}
+              scale={0.6}
+            />
+            <BathroomModel
+              hoverElement={hoverElement}
+              updateHover={updateHover}
+              reUpdateHover={reUpdateHover}
+              rotation={[0, Math.PI / 1.1, 0]}
+              position={[0, -6.1, 0.8]}
+              scale={[1.2, 1, 1]}
+            />
           </Selection>
-          <BedRoomModel position={[0, -2.5, 1]} scale={0.6} />
-          <BathroomModel
-            rotation={[0, Math.PI / 1.1, 0]}
-            position={[0, -6.1, 0.8]}
-            scale={[1.2, 1, 1]}
-          />
         </Bvh>
 
         <color attach="background" args={["#151520"]} />
@@ -96,7 +118,7 @@ function Effects() {
         hiddenEdgeColor="white"
         blur
         width={size.width * 1.25}
-        edgeStrength={10}
+        edgeStrength={6}
       />
       <ToneMapping />
     </EffectComposer>

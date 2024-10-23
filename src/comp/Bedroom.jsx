@@ -1,7 +1,12 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
-export function BedRoomModel(props) {
+export function BedRoomModel({
+  hoverElement,
+  updateHover,
+  reUpdateHover,
+  ...props
+}) {
   const { nodes, materials } = useGLTF("./bedroom.glb");
   return (
     <group {...props} dispose={null}>
@@ -16,6 +21,8 @@ export function BedRoomModel(props) {
               receiveShadow
               geometry={nodes.Bedroom_Bedroom_0.geometry}
               material={materials["Bedroom.002"]}
+              onPointerOver={updateHover}
+              onPointerOut={reUpdateHover}
             />
             <mesh
               castShadow
@@ -23,20 +30,28 @@ export function BedRoomModel(props) {
               geometry={nodes.Bedroom_Bedroom_0001.geometry}
               material={materials["Bedroom.002"]}
             />
-            <mesh
-              name="mat"
-              castShadow
-              receiveShadow
-              geometry={nodes.Bedroom_Carpet_0.geometry}
-              material={materials["Carpet.002"]}
-            />
-            <mesh
-              name="foam"
-              castShadow
-              receiveShadow
-              geometry={nodes.Bedroom_Duvet_0.geometry}
-              material={materials["Duvet.002"]}
-            />
+            <Select enabled={hoverElement === "mat"}>
+              <mesh
+                name="mat"
+                castShadow
+                receiveShadow
+                geometry={nodes.Bedroom_Carpet_0.geometry}
+                material={materials["Carpet.002"]}
+                onPointerOver={updateHover}
+                onPointerOut={reUpdateHover}
+              />
+            </Select>
+            <Select enabled={hoverElement === "foam"}>
+              <mesh
+                name="foam"
+                castShadow
+                receiveShadow
+                geometry={nodes.Bedroom_Duvet_0.geometry}
+                material={materials["Duvet.002"]}
+                onPointerOver={updateHover}
+                onPointerOut={reUpdateHover}
+              />
+            </Select>
             <mesh
               castShadow
               receiveShadow
