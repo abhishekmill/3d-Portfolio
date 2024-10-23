@@ -25,6 +25,7 @@ import Overlay from "./comp/Overlay";
 import { OfficeModel } from "./comp/Office";
 import { BedRoomModel } from "./comp/Bedroom";
 import { BathroomModel } from "./comp/Bathroom";
+import Effectx from "./comp/Effects";
 
 export default function App() {
   const cameraRef = useRef();
@@ -65,10 +66,11 @@ export default function App() {
       <Canvas>
         <Cameracontrol animation={animation} />
         {/* <CameraControls ref={cameraRef} /> */}
+        {/* <OrbitControls /> */}
 
         <Bvh firstHitOnly>
           <Selection>
-            <Effects />
+            <Effectx />
             <OfficeModel
               hoverElement={hoverElement}
               updateHover={updateHover}
@@ -100,27 +102,5 @@ export default function App() {
         <Preload />
       </Canvas>
     </div>
-  );
-}
-
-function Effects() {
-  const { size } = useThree();
-
-  return (
-    <EffectComposer
-      stencilBuffer
-      disableNormalPass
-      autoClear={false}
-      multisampling={4}
-    >
-      <Outline
-        visibleEdgeColor="white"
-        hiddenEdgeColor="white"
-        blur
-        width={size.width * 1.25}
-        edgeStrength={6}
-      />
-      <ToneMapping />
-    </EffectComposer>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Product from "./Product";
 
 const Overlay = ({ animation }) => {
   return (
@@ -83,6 +84,12 @@ const Overlay = ({ animation }) => {
             modi, ullam pariatur laboriosam fugit dolorum cum ratione quo.
           </p>
         </div>
+      </div>
+
+      {/* product view  */}
+
+      <div>
+        <Product />
       </div>
     </div>
   );

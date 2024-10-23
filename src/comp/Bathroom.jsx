@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 
@@ -9,6 +9,14 @@ export function BathroomModel({
   ...props
 }) {
   const { nodes, materials } = useGLTF("./bathroom.glb");
+
+  useEffect(() => {
+    materials.MirrorLight.color.multiplyScalar(50);
+    materials.MirrorLight.tonemapped = false;
+    // materials.MirrorLight.color.set("yellow");
+    console.log(materials);
+  }, [materials]); // Add dependencies to useEffect
+
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.488}>
@@ -19,7 +27,7 @@ export function BathroomModel({
             scale={[297, 330, 23.76]}
           >
             <mesh
-              castShadow
+              castShadowddddddddddd
               receiveShadow
               geometry={nodes.Bathroom_BackWall_0.geometry}
               material={materials.BackWall}
