@@ -5,6 +5,7 @@ export function BedRoomModel({
   hoverElement,
   updateHover,
   reUpdateHover,
+  handleClick,
   ...props
 }) {
   const { nodes, materials } = useGLTF("./bedroom.glb");
@@ -17,10 +18,12 @@ export function BedRoomModel({
             scale={[2721.36, 3174.919, 1814.24]}
           >
             <mesh
+              name="wall"
               castShadow
               receiveShadow
               geometry={nodes.Bedroom_Bedroom_0.geometry}
               material={materials["Bedroom.002"]}
+              onClick={handleClick}
               onPointerOver={updateHover}
               onPointerOut={reUpdateHover}
             />
@@ -39,17 +42,19 @@ export function BedRoomModel({
                 material={materials["Carpet.002"]}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
-            <Select enabled={hoverElement === "foam"}>
+            <Select enabled={hoverElement === "bed"}>
               <mesh
-                name="foam"
+                name="bed"
                 castShadow
                 receiveShadow
                 geometry={nodes.Bedroom_Duvet_0.geometry}
                 material={materials["Duvet.002"]}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
             <mesh

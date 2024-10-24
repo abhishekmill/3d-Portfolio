@@ -1,7 +1,113 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./Product";
 
-const Overlay = ({ animation }) => {
+const Overlay = ({ animation, clickedlement }) => {
+  const [selectedData, setSelectedData] = useState(null);
+
+  const data = [
+    {
+      name: "chair",
+      price: "3590.00",
+      description:
+        "TEODORES Chair, Steel, Epoxy/Polyester Powder Coating (White)",
+      brand: "IKEEA",
+      star: 4,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX59KIamrvJs9T8YIgboWn-JbTlqGXiV2MTA&s",
+    },
+    {
+      name: "table",
+      price: "9,999.002",
+      description: "FURNISHIAA White Wooden Study and Computer Table",
+      brand: "Furnishiaa",
+      star: 5,
+      image:
+        "https://furnishiaa.com/cdn/shop/products/2-6-646ee78f-4edc-487b-b7ca-426d839bb6b5-_3.jpg?v=1688111805&width=360",
+    },
+    {
+      name: "jhoomar",
+      price: "2300.00",
+      description: "Pundhir Glass Lights Thali Pendant Ceiling Lights Lamp",
+      brand: "Pundhir",
+      star: 3,
+      image:
+        "https://images.jdmagicbox.com/v2/comp/chennai/v6/044pxx44.xx44.170106123741.u1v6/catalogue/plk-led-solutions-shenoy-nagar-chennai-led-light-dealers-kfytoye8cy.jpg",
+    },
+    {
+      name: "bed",
+      price: "95000.00",
+      description:
+        "Bed structure of high grade BWR ply and cedar wood as required",
+      brand: "Minoti Bed",
+      star: 4,
+      image: "https://m.media-amazon.com/images/I/81s0B-PBY+L._SL1500_.jpg",
+    },
+    {
+      name: "painting",
+      price: "3300.00",
+      description: "Just a wallpaper",
+      brand: "Nature",
+      star: 4,
+      image:
+        "https://steamuserimages-a.akamaihd.net/ugc/1002556983888864785/2AB2AC0F87C616A9A9E7D5126C2719D8A9257027/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",
+    },
+    {
+      name: "mat",
+      price: "5000",
+      description:
+        "New design jacquard floor mat non-slip living room carpet wilton bedroom mat ",
+      brand: "Ningbo Hapton",
+      star: 3,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeejQHQnGVmuI2e0RHKxnR5clrzzGw_31oyA&s",
+    },
+    {
+      name: "mirror",
+      price: "5000",
+      description: "Golden Frame Round Lighted Mirror for Bathroom ",
+      brand: "ARUMMA",
+      star: 5,
+      image:
+        "https://m.media-amazon.com/images/I/71UUr6uzJrL._AC_UF1000,1000_QL80_.jpg",
+    },
+    {
+      name: "sink",
+      price: "20000",
+      description: "RADBAY Elena 24 Inch Wall Mounted Bath Vanity Washbasin  ",
+      brand: "RUVATI",
+      star: 5,
+      image:
+        "https://www.ruvati.com/wp-content/uploads/Category_Tile_Bathroom.jpg",
+    },
+    {
+      name: "light",
+      price: "2000",
+      description: "CUSTO 3818/1 LED Pendant Light ",
+      brand: "ACB",
+      star: 4,
+      image: "https://m.media-amazon.com/images/I/31R9EspRorS._AC_SL1000_.jpg",
+    },
+    {
+      name: "toilet",
+      price: "5,999",
+      description: "Plantex Ceramic Rimless Western Toilet ",
+      brand: "PlantexIndia",
+      star: 4,
+      image:
+        "https://rukminim2.flixcart.com/image/416/416/xif0q/commode/4/x/r/64-51-8-aps-748-plantex-71-original-imah4qrs273fwrgh.jpeg?q=70&crop=false",
+    },
+  ];
+
+  useEffect(() => {
+    handleHoverFun();
+  }, [clickedlement]);
+
+  const handleHoverFun = () => {
+    if (clickedlement) {
+      setSelectedData(data.find((item, idx) => item.name == clickedlement));
+    }
+  };
+
   return (
     <div
       className={` ${
@@ -32,7 +138,7 @@ const Overlay = ({ animation }) => {
         <div
           className={` ${
             animation == "anim1" ? "opacity-100 pt-0" : "opacity-0 pt-10 "
-          } duration-500 delay-100 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl mt-[80vh] rounded   `}
+          } duration-500 delay-100 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis  `}
         >
           <h1 className="text-[#191d21] font-bold capitalize text-4xl">
             this is office
@@ -51,8 +157,8 @@ const Overlay = ({ animation }) => {
           className={` ${
             animation == "anim2"
               ? "opacity-100 mt-[80vh]"
-              : "opacity-0 mt-[100vh] "
-          } duration-700 delay-300 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded   `}
+              : "opacity-0 mt-[100vh]  "
+          } duration-700 delay-300 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded overflow-hidden text-ellipsis    `}
         >
           <h1 className="text-white font-bold capitalize text-4xl">
             this Bedroom is here
@@ -73,7 +179,7 @@ const Overlay = ({ animation }) => {
             animation == "anim3"
               ? "opacity-100 mt-[80vh]"
               : "opacity-0 mt-[90vh] "
-          } duration-700 delay-300 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded   `}
+          } duration-700 delay-300 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded  overflow-hidden text-ellipsis   `}
         >
           <h1 className="text-white font-bold capitalize text-4xl">
             this Bedroom is here
@@ -88,9 +194,7 @@ const Overlay = ({ animation }) => {
 
       {/* product view  */}
 
-      <div>
-        <Product />
-      </div>
+      <div>{selectedData && <Product selectedData={selectedData} />}</div>
     </div>
   );
 };

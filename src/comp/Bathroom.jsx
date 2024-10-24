@@ -6,6 +6,8 @@ export function BathroomModel({
   hoverElement,
   updateHover,
   reUpdateHover,
+  handleClick,
+
   ...props
 }) {
   const { nodes, materials } = useGLTF("./bathroom.glb");
@@ -38,15 +40,16 @@ export function BathroomModel({
               geometry={nodes.Bathroom_Bottles_0.geometry}
               material={materials.Bottles}
             />
-            <Select enabled={hoverElement === "basein"}>
+            <Select enabled={hoverElement === "sink"}>
               <mesh
-                name="basein"
+                name="sink"
                 castShadow
                 receiveShadow
                 geometry={nodes.Bathroom_Cabinet_0.geometry}
                 material={materials.Cabinet}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
             <mesh
@@ -70,6 +73,7 @@ export function BathroomModel({
                 material={materials.Light}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
             <mesh
@@ -80,6 +84,7 @@ export function BathroomModel({
               material={materials.Mirror}
               onPointerOver={updateHover}
               onPointerOut={reUpdateHover}
+              onClick={handleClick}
             />
             <mesh
               castShadow
@@ -96,6 +101,7 @@ export function BathroomModel({
                 material={materials.MirrorTrim}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
             <mesh
@@ -133,6 +139,7 @@ export function BathroomModel({
                 material={materials.Toilet}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
 

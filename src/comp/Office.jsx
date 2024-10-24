@@ -5,6 +5,7 @@ export function OfficeModel({
   hoverElement,
   updateHover,
   reUpdateHover,
+  handleClick,
   ...props
 }) {
   const { nodes, materials } = useGLTF("./office.glb");
@@ -42,6 +43,7 @@ export function OfficeModel({
                 material={materials.Chair}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
 
@@ -54,6 +56,7 @@ export function OfficeModel({
                 material={materials.Lights}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
             <Select enabled={hoverElement === "painting"}>
@@ -65,6 +68,7 @@ export function OfficeModel({
                 material={materials.Painting}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
             <mesh
@@ -94,6 +98,7 @@ export function OfficeModel({
                 material={materials.Table}
                 onPointerOver={updateHover}
                 onPointerOut={reUpdateHover}
+                onClick={handleClick}
               />
             </Select>
             <mesh

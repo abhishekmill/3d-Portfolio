@@ -128,11 +128,11 @@ const Cameracontrol = ({ animation }) => {
     }
   });
 
-  useControls("helper angle", {
-    getAngle: button(() => {
-      console.log("Angle:", controlsRef.current.getAzimuthalAngle());
-    }),
-  });
+  // useControls("helper angle", {
+  //   getAngle: button(() => {
+  //     console.log("Angle:", controlsRef.current.getAzimuthalAngle());
+  //   }),
+  // });
 
   useEffect(() => {
     animateCamera(animationParam.anim0); // Initialize camera position
