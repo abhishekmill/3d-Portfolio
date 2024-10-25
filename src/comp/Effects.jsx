@@ -1,7 +1,9 @@
 import { useLoader, useThree } from "@react-three/fiber";
 import {
   Bloom,
+  BrightnessContrast,
   EffectComposer,
+  HueSaturation,
   LUT,
   Outline,
   ToneMapping,
@@ -13,24 +15,41 @@ import { LUTCubeLoader } from "postprocessing";
 function Effectx() {
   const { size } = useThree();
   const texture = useLoader(LUTCubeLoader, "/luts.cube");
-  // const bloomconfig = useControls(
-  //   "bloom",
+  // const brightnessconfig = useControls(
+  //   "brightness",
 
   //   {
   //     enabled: true,
-  //     luminanceThreshold: {
+  //     brightness: {
+  //       value: 0.02,
+  //       min: 0,
+  //       max: 5,
+  //       step: 0.01,
+  //     },
+  //     contrast: {
+  //       value: 0.06,
+  //       min: -3,
+  //       max: 5,
+  //       step: 0.01,
+  //     },
+  //   }
+  // );
+  // const hueconfig = useControls(
+  //   "hue",
+
+  //   {
+  //     hue: {
   //       value: 0.5,
   //       min: 0,
-  //       max: 2,
-  //       step: 0.1,
+  //       max: 5,
+  //       step: 0.01,
   //     },
-  //     intensity: {
+  //     saturation: {
   //       value: 0.4,
   //       min: 0,
-  //       max: 2,
-  //       step: 0.1,
+  //       max: 5,
+  //       step: 0.01,
   //     },
-  //     mipmapBlur: true,
   //   }
   // );
 
@@ -43,12 +62,14 @@ function Effectx() {
     >
       {true && (
         <Bloom
-          luminanceThreshold={0.45}
-          intensity={1}
+          luminanceThreshold={0.3}
+          intensity={0.25}
           mipmapBlur={true}
           // {...bloomconfig}
         />
       )}
+      <BrightnessContrast contrast={0.06} brightness={0.02} />
+      <HueSaturation saturation={0.37} />
 
       <Outline
         visibleEdgeColor="white"

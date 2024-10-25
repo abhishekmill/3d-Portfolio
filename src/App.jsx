@@ -147,7 +147,7 @@ export default function App() {
         </Bvh>
 
         <color attach="background" args={["#151520"]} />
-        <Environment preset="city" />
+        <Environment preset="night" backgroundIntensity={0.1} />
         <Preload />
       </Canvas>
     </div>

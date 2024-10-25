@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 export function BedRoomModel({
@@ -9,6 +9,14 @@ export function BedRoomModel({
   ...props
 }) {
   const { nodes, materials } = useGLTF("./bedroom.glb");
+
+  // materials.MirrorLight.color.multiplyScalar(50);
+
+  useEffect(() => {
+    // materials["Windows.002"].color.set("blue");
+    materials["Windows.002"].color.multiplyScalar(30.5);
+  }, []);
+
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.094}>

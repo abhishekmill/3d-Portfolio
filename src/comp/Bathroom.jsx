@@ -14,10 +14,12 @@ export function BathroomModel({
 
   useEffect(() => {
     materials.MirrorLight.color.multiplyScalar(50);
+    materials.WindowLight.color.multiplyScalar(0.02);
     materials.MirrorLight.tonemapped = false;
+    materials.WindowLight.tonemapped = false;
     // materials.MirrorLight.color.set("yellow");
     console.log(materials);
-  }, [materials]); // Add dependencies to useEffect
+  }, []); // Add dependencies to useEffect
 
   return (
     <group {...props} dispose={null}>
@@ -168,6 +170,7 @@ export function BathroomModel({
               material={materials.ToiletRug}
             />
             <mesh
+              name="windowlight"
               castShadow
               receiveShadow
               geometry={nodes.Bathroom_WindowLight_0.geometry}

@@ -128,7 +128,7 @@ const Overlay = ({ animation, clickedlement }) => {
         >
           <h1 className="text-6xl capitalize  font-bold  text-white ">
             WHERE HOME DEFINE CLASS{" "}
-            <p className="text-xl py-5 ">welcome to my home</p>{" "}
+            <p className="text-xl py-5 "> created with Three.js</p>{" "}
           </h1>
         </div>
       </div>
@@ -138,15 +138,14 @@ const Overlay = ({ animation, clickedlement }) => {
         <div
           className={` ${
             animation == "anim1" ? "opacity-100 pt-0" : "opacity-0 pt-10 "
-          } duration-500 delay-100 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis  `}
+          } duration-500 delay-100 w-1/2 max-w-[600px] h-1/6 border bg-white bg-opacity-15 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis text-white px-5 `}
         >
-          <h1 className="text-[#191d21] font-bold capitalize text-4xl">
-            this is office
+          <h1 className=" font-bold capitalize text-4xl">
+            Welcome to our workspace
           </h1>
-          <p className="p-5">
+          <p className="p-5 ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam eius
-            porro officiis quam. Ipsum, alias odio illum in labore voluptas quam
-            modi, ullam pariatur laboriosam fugit dolorum cum ratione quo.
+            porro officiis quam. Ipsum, alias odio illum in labore
           </p>
         </div>
       </div>
@@ -158,15 +157,14 @@ const Overlay = ({ animation, clickedlement }) => {
             animation == "anim2"
               ? "opacity-100 mt-[80vh]"
               : "opacity-0 mt-[100vh]  "
-          } duration-700 delay-300 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded overflow-hidden text-ellipsis    `}
+          } duration-700 delay-300 w-1/2 max-w-[600px] h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded overflow-hidden text-ellipsis  text-white  `}
         >
-          <h1 className="text-white font-bold capitalize text-4xl">
-            this Bedroom is here
+          <h1 className=" font-bold capitalize text-4xl">
+            Guest accommodation
           </h1>
           <p className="p-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam eius
-            porro officiis quam. Ipsum, alias odio illum in labore voluptas quam
-            modi, ullam pariatur laboriosam fugit dolorum cum ratione quo.
+            modi, ullam pariatur laboriosam fugit ratione
           </p>
         </div>
       </div>
@@ -179,22 +177,38 @@ const Overlay = ({ animation, clickedlement }) => {
             animation == "anim3"
               ? "opacity-100 mt-[80vh]"
               : "opacity-0 mt-[90vh] "
-          } duration-700 delay-300 w-1/2 h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded  overflow-hidden text-ellipsis   `}
+          } duration-700 delay-300 w-1/2 max-w-[600px] h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded  overflow-hidden text-ellipsis text-white   `}
         >
-          <h1 className="text-white font-bold capitalize text-4xl">
-            this Bedroom is here
-          </h1>
+          <h1 className=" font-bold capitalize text-4xl">Restroom area</h1>
           <p className="p-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam eius
-            porro officiis quam. Ipsum, alias odio illum in labore voluptas quam
-            modi, ullam pariatur laboriosam fugit dolorum cum ratione quo.
+            rum cum ratione quo.
           </p>
         </div>
       </div>
 
       {/* product view  */}
 
-      <div>{selectedData && <Product selectedData={selectedData} />}</div>
+      <div>
+        {selectedData ? (
+          <Product selectedData={selectedData} />
+        ) : (
+          <div className="absolute z-10 hidden w-full overflow-hidden h-screen   duration-1000  flex justify-center text-center    ">
+            <div
+              className={` ${
+                animation == "anim0"
+                  ? "opacity-0"
+                  : "opacity-100  animate-pulse   "
+              }
+                delay-300  h-fit py-3 px-10 border mt-[5vh] bg-white bg-opacity-15 drop-shadow-xl  rounded  overflow-hidden text-ellipsis  `}
+            >
+              <h1 className="text-white font-bold capitalize text-xl">
+                hover Mouse
+              </h1>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
