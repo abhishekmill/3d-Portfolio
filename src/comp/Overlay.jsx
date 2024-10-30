@@ -124,9 +124,9 @@ const Overlay = ({ animation, clickedlement }) => {
         <div
           className={`${
             animation == "anim0" ? "opacity-100" : "opacity-0 mb-14 "
-          } w-1/2 max-w-[50vw] content-center  text-center h-[250px] duration-700 border`}
+          } md:w-1/2 md:max-w-[50vw]  content-center  text-center h-[250px] duration-700 border`}
         >
-          <h1 className="text-6xl capitalize  font-bold  text-white ">
+          <h1 className="md:text-6xl text-4xl capitalize  font-bold  text-white ">
             WHERE HOME DEFINE CLASS{" "}
             <p className="text-xl py-5 "> created with Three.js</p>{" "}
           </h1>
@@ -138,14 +138,13 @@ const Overlay = ({ animation, clickedlement }) => {
         <div
           className={` ${
             animation == "anim1" ? "opacity-100 pt-0" : "opacity-0 pt-10 "
-          } duration-500 delay-100 w-1/2 max-w-[600px] h-1/6 border bg-white bg-opacity-15 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis text-white px-5 `}
+          } duration-500 delay-100 md:w-1/2  max-w-[600px] h-1/6 border backdrop-blur-sm pt-5 bg-slate-600 bg-opacity-25 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis text-white px-5 `}
         >
-          <h1 className=" font-bold capitalize text-4xl">
-            Welcome to our workspace
+          <h1 className=" font-bold capitalize md:text-4xl  text-3xl">
+            Our workspace
           </h1>
           <p className="p-5 ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam eius
-            porro officiis quam. Ipsum, alias odio illum in labore
           </p>
         </div>
       </div>
@@ -157,14 +156,13 @@ const Overlay = ({ animation, clickedlement }) => {
             animation == "anim2"
               ? "opacity-100 mt-[80vh]"
               : "opacity-0 mt-[100vh]  "
-          } duration-700 delay-300 w-1/2 max-w-[600px] h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded overflow-hidden text-ellipsis  text-white  `}
+          } duration-500 delay-100 md:w-1/2  max-w-[600px] h-1/6 border backdrop-blur-sm pt-5 bg-slate-600 bg-opacity-25 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis text-white px-5  `}
         >
-          <h1 className=" font-bold capitalize text-4xl">
+          <h1 className=" font-bold capitalize md:text-4xl text-3xl">
             Guest accommodation
           </h1>
           <p className="p-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam eius
-            modi, ullam pariatur laboriosam fugit ratione
           </p>
         </div>
       </div>
@@ -177,12 +175,13 @@ const Overlay = ({ animation, clickedlement }) => {
             animation == "anim3"
               ? "opacity-100 mt-[80vh]"
               : "opacity-0 mt-[90vh] "
-          } duration-700 delay-300 w-1/2 max-w-[600px] h-1/6 border bg-white bg-opacity-15 drop-shadow-xl  rounded  overflow-hidden text-ellipsis text-white   `}
+          } duration-500 delay-100 md:w-1/2  max-w-[600px] h-1/6 border backdrop-blur-sm pt-5 bg-slate-600 bg-opacity-25 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis text-white px-5   `}
         >
-          <h1 className=" font-bold capitalize text-4xl">Restroom area</h1>
+          <h1 className=" font-bold capitalize md:text-4xl text-3xl">
+            Restroom area
+          </h1>
           <p className="p-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam eius
-            rum cum ratione quo.
           </p>
         </div>
       </div>
@@ -193,7 +192,7 @@ const Overlay = ({ animation, clickedlement }) => {
         {selectedData ? (
           <Product selectedData={selectedData} />
         ) : (
-          <div className="absolute z-10 hidden w-full overflow-hidden h-screen   duration-1000  flex justify-center text-center    ">
+          <div className="absolute z-10 hidden w-full overflow-hidden h-screen   duration-1000   justify-center text-center    ">
             <div
               className={` ${
                 animation == "anim0"

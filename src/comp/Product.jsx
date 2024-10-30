@@ -4,9 +4,9 @@ const Product = ({ selectedData }) => {
   const arrayImg = [];
 
   return (
-    <div className=" flex justify-center mt-14   w-full  h-60 absolute z-10 ">
-      <div className="  border w-1/2 h-[20vh] duration-200 flex backdrop-blur-sm ">
-        <div className=" h-full overflow-hidden  w-1/4">
+    <div className=" flex justify-center mt-14    w-full  h-60 absolute z-10 ">
+      <div className="  border w-full md:w-1/2 m-2 h-[20vh] duration-200 flex backdrop-blur-sm bg-slate-400 bg-opacity-30 ">
+        <div className=" h-full overflow-hidden  w-1/2  md:w-1/4">
           <img
             className="object-cover h-full"
             src={selectedData.image}
@@ -14,9 +14,13 @@ const Product = ({ selectedData }) => {
           />
         </div>
 
-        <div className="text-white flex flex-col justify-between  w-[30vw] ">
-          <h3 className="text-xl px-5 pt-5">{selectedData.description}</h3>
-          <p className="px-5 py-3">Brand: {selectedData.brand} </p>
+        <div className="text-white flex flex-col justify-between  md:w-[30vw] w-full  ">
+          <h3 className="md:text-xl text-lg px-5 pt-5">
+            {selectedData.description}
+          </h3>
+          <p className="px-5 font-bold md:text-lg text-sm py-3">
+            Brand: {selectedData.brand}{" "}
+          </p>
           <div className="flex pb-5   px-5 justify-between">
             <div className="flex ">
               {Array(selectedData.star)

@@ -11,6 +11,7 @@ import { OfficeModel } from "./comp/Office";
 import { BedRoomModel } from "./comp/Bedroom";
 import { BathroomModel } from "./comp/Bathroom";
 import Effectx from "./comp/Effects";
+import { AmbientLight } from "three";
 
 export default function App() {
   const cameraRef = useRef();
@@ -82,6 +83,19 @@ export default function App() {
     }
   };
 
+  const [fov, setFov] = useState(75);
+
+  useEffect(() => {
+    const updateFov = () => {
+      // Set fov to 115 if width is below a certain threshold (e.g., 768px for mobile)
+      setFov(window.innerWidth < 768 ? 115 : 85);
+    };
+    updateFov(); // Initial check
+    window.addEventListener("resize", updateFov); // Update on resize
+
+    return () => window.removeEventListener("resize", updateFov);
+  }, []);
+
   return (
     <div className="w-full h-screen ">
       <div className="absolute pointer-events-none  w-full h-screen  flex  items-center ">
@@ -108,11 +122,15 @@ export default function App() {
       </div>
 
       <Overlay clickedlement={clickedlement} animation={animation} />
-      <Canvas name="canvas" onPointerMissed={handleCanvasClick}>
+      <Canvas
+        name="canvas"
+        camera={{ fov }}
+        onPointerMissed={handleCanvasClick}
+      >
         <Cameracontrol animation={animation} />
         {/* <CameraControls ref={cameraRef} /> */}
         {/* <OrbitControls /> */}
-
+        <ambientLight intensity={1} />
         <Bvh firstHitOnly>
           <Selection>
             <Effectx />

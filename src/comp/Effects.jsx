@@ -69,7 +69,7 @@ function Effectx() {
         />
       )}
       <BrightnessContrast contrast={0.06} brightness={0.02} />
-      <HueSaturation saturation={0.37} />
+      {/* <HueSaturation saturation={0.37} /> */}
 
       <Outline
         visibleEdgeColor="white"
@@ -80,7 +80,6 @@ function Effectx() {
         width={size.width * 1.25}
         edgeStrength={10}
       />
-      <ToneMapping />
       {/* <LUT lut={texture} /> */}
     </EffectComposer>
   );
