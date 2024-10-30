@@ -115,7 +115,7 @@ export default function App() {
 
         <Bvh firstHitOnly>
           <Selection>
-            {/* <Effectx /> */}
+            <Effectx />
             <OfficeModel
               hoverElement={hoverElement}
               updateHover={updateHover}

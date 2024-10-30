@@ -60,7 +60,7 @@ function Effectx() {
       autoClear={false}
       multisampling={4}
     >
-      {true && (
+      {false && (
         <Bloom
           luminanceThreshold={0.3}
           intensity={0.25}
