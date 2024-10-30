@@ -134,7 +134,7 @@ const Overlay = ({ animation, clickedlement }) => {
       </div>
 
       {/* anim1 */}
-      <div className="absolute z-10 w-full  h-screen   duration-1000  flex justify-center text-center  items-center  ">
+      <div className="absolute z-10 w-full  h-screen   duration-1000  md:flex hidden justify-center text-center  items-center  ">
         <div
           className={` ${
             animation == "anim1" ? "opacity-100 pt-0" : "opacity-0 pt-10 "
@@ -150,11 +150,11 @@ const Overlay = ({ animation, clickedlement }) => {
       </div>
 
       {/* anim 2 */}
-      <div className="absolute z-10 w-full  h-screen   duration-1000  flex justify-center text-center  items-center  ">
+      <div className="absolute z-10 w-full  h-screen   duration-1000  md:flex hidden justify-center text-center  items-center  ">
         <div
           className={` ${
             animation == "anim2"
-              ? "opacity-100 mt-[80vh]"
+              ? "opacity-100 mt-[80vh] "
               : "opacity-0 mt-[100vh]  "
           } duration-500 delay-100 md:w-1/2  max-w-[600px] h-1/6 border backdrop-blur-sm pt-5 bg-slate-600 bg-opacity-25 drop-shadow-xl mt-[80vh] rounded  overflow-hidden text-ellipsis text-white px-5  `}
         >
@@ -169,7 +169,7 @@ const Overlay = ({ animation, clickedlement }) => {
 
       {/* anim 3 */}
 
-      <div className="absolute z-10 w-full overflow-hidden h-screen   duration-1000  flex justify-center text-center  items-center  ">
+      <div className="absolute z-10 w-full overflow-hidden h-screen   duration-1000  md:flex hidden justify-center text-center  items-center  ">
         <div
           className={` ${
             animation == "anim3"
@@ -192,7 +192,7 @@ const Overlay = ({ animation, clickedlement }) => {
         {selectedData ? (
           <Product selectedData={selectedData} />
         ) : (
-          <div className="absolute z-10 hidden w-full overflow-hidden h-screen   duration-1000   justify-center text-center    ">
+          <div className="absolute z-10 hidden w-full overflow-hidden h-screen duration-1000   justify-center text-center ">
             <div
               className={` ${
                 animation == "anim0"

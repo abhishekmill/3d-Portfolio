@@ -99,7 +99,7 @@ export default function App() {
   return (
     <div className="w-full h-screen ">
       <div className="absolute pointer-events-none  w-full h-screen  flex  items-center ">
-        <div className="w-full h-[5vh] pointer-events-auto justify-between  px-8 z-[11]  flex">
+        <div className="w-full h-[5vh] pointer-events-auto justify-between  md:px-8 z-[11]  flex">
           <svg
             onClick={handlePrevious}
             className=" w-20  duration-200 fill-white hover:fill-slate-400"
