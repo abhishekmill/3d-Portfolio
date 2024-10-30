@@ -17,7 +17,7 @@ const Overlay = ({ animation, clickedlement }) => {
     },
     {
       name: "table",
-      price: "9,999.002",
+      price: "9,999.2",
       description: "FURNISHIAA White Wooden Study and Computer Table",
       brand: "Furnishiaa",
       star: 5,

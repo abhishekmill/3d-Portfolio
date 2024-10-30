@@ -5,8 +5,8 @@ const Product = ({ selectedData }) => {
 
   return (
     <div className=" flex justify-center mt-14    w-full  h-60 absolute z-10 ">
-      <div className="  border w-full md:w-1/2 m-2 h-[20vh] duration-200 flex backdrop-blur-sm bg-slate-400 bg-opacity-30 ">
-        <div className=" h-full overflow-hidden  w-1/2  md:w-1/4">
+      <div className="  border w-full md:w-1/2 m-2 md:h-[20vh] h-fit duration-200 flex backdrop-blur-sm bg-slate-400 bg-opacity-30 ">
+        <div className="  overflow-hidden  w-1/2  md:w-1/4">
           <img
             className="object-cover h-full"
             src={selectedData.image}
@@ -15,10 +15,10 @@ const Product = ({ selectedData }) => {
         </div>
 
         <div className="text-white flex flex-col justify-between  md:w-[30vw] w-full  ">
-          <h3 className="md:text-xl text-lg px-5 pt-5">
+          <h3 className="md:text-xl h-16 md:h-auto overflow-hidden text-lg px-2 md:p-5 pt-2">
             {selectedData.description}
           </h3>
-          <p className="px-5 font-bold md:text-lg text-sm py-3">
+          <p className="px-5 font-bold md:text-lg text-sm  py-3">
             Brand: {selectedData.brand}{" "}
           </p>
           <div className="flex pb-5   px-5 justify-between">
