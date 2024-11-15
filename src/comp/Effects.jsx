@@ -3,18 +3,11 @@ import {
   Bloom,
   BrightnessContrast,
   EffectComposer,
-  HueSaturation,
-  LUT,
   Outline,
-  ToneMapping,
-  Vignette,
 } from "@react-three/postprocessing";
-import { useControls } from "leva";
-import { LUTCubeLoader } from "postprocessing";
 
 function Effectx() {
   const { size } = useThree();
-  const texture = useLoader(LUTCubeLoader, "/luts.cube");
   // const brightnessconfig = useControls(
   //   "brightness",
 

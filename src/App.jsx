@@ -12,6 +12,7 @@ import { BedRoomModel } from "./comp/Bedroom";
 import { BathroomModel } from "./comp/Bathroom";
 import Effectx from "./comp/Effects";
 import { AmbientLight } from "three";
+import Preloader from "./comp/Preloader";
 
 export default function App() {
   const cameraRef = useRef();
@@ -98,6 +99,7 @@ export default function App() {
 
   return (
     <div className="w-full h-screen ">
+      <Preloader />
       <div className="absolute pointer-events-none  w-full h-screen  flex  items-center ">
         <div className="w-full h-[5vh] pointer-events-auto justify-between  md:px-8 z-[11]  flex">
           <svg
@@ -120,7 +122,6 @@ export default function App() {
           </svg>
         </div>
       </div>
-
       <Overlay clickedlement={clickedlement} animation={animation} />
       <Canvas
         name="canvas"
